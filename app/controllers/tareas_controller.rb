@@ -1,5 +1,6 @@
 class TareasController < ApplicationController
   
+  before_action :authenticate_usuario!, except: [:index, :show]
   before_action :set_tarea, except: [:index, :new, :create]
   
   def index
@@ -8,13 +9,13 @@ class TareasController < ApplicationController
   end
 
   def new
-  	@tarea = Tarea.new (tarea_params)
-    if @tarea.save
+  	@tarea = Tarea.new
 
   end
 
   	def create
 		  @tarea = Tarea.new(titulo: params[:tarea][:titulo], descripcion: params[:tarea][:descripcion])
+      @tarea.usuario = current_usuario
 		  if @tarea.save
 		  	#insert into tareas(titulo,descripcion) values ()
 		    redirect_to controller: 'tareas', acttion: 'show', id: @tarea.id
@@ -40,16 +41,16 @@ class TareasController < ApplicationController
 
   def update
   #@tarea = Tarea.find {params|:id|}
-  @tarea.update(titulo: params[:titulo], descripcion: params[:descripcion])
-  redirect_to controller: "tareas", action: 'show', id: @tarea.id
-else
-  render :edit
+  if @tarea.update(tarea_params)
+    redirect_to controller: "tareas", action: 'show', id: @tarea.id
+  else
+   render :edit
   end
 end
 
 private
   def set_tarea
-    @tarea = Tarea.find {params|:id|}
+    @tarea = Tarea.find(params[:id])
   end
 
   def tarea_params

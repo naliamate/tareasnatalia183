@@ -8,3 +8,8 @@
 			<p><%= @tarea.descripcion %></p>
 		</div>
 </div>
+
+<% unless @tarea.usuario.nil? %>
+<p>Escrito por: <%= @tarea.usuario.email %></p>
+	<% end %>
+
