@@ -1,0 +1,7 @@
+<% frutas = ['Manzana','Pera','Mango'] %>
+<ul>
+<% frutas.each do |fruta| %>
+	<li><%= fruta %></li>
+	
+<%end %>
+</ul>

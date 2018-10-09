@@ -1,0 +1,9 @@
+<div class="field">
+    <%= form.label :usuario_id %>
+    <%= form.text_field :usuario_id, id: :comentario_usuario_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tarea_id %>
+    <%= form.text_field :tarea_id, id: :comentario_tarea_id %>
+  </div>
